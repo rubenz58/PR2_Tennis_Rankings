@@ -20,8 +20,6 @@ class User(db.Model):
     google_id = db.Column(db.String(100), unique=True, nullable=True)
     auth_method = db.Column(db.String(20), nullable=False, default="email")
 
-    
-
     def __repr__(self):
         return f"<User {self.email}>"
     
@@ -33,4 +31,22 @@ class User(db.Model):
             "name": self.name,
             "auth_method": self.auth_method,
             "created_at": self.created_at
+        }
+
+
+class Player(db.Model):
+    __tablename__ = "players"
+
+    id = db.Column(db.Integer, primary_key=True)
+    ranking = db.Column(db.Integer, unique=True, nullable=False, index=True)  # 1-100
+    name = db.Column(db.String(100), nullable=False)
+    points = db.Column(db.Integer, nullable=False)
+    last_updated = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "ranking": self.ranking,
+            "name": self.name,
+            "points": self.points
         }

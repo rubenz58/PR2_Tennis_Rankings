@@ -4,7 +4,8 @@ from config import Config
 from flask_migrate import Migrate
 
 from routes.api.authentification.authentification import auth_bp
-from routes.api.authentification.models import db
+from routes.api.rankings.rankings import rankings_bp
+from models import db
 
 
 def create_app():
@@ -26,6 +27,7 @@ def create_app():
 
     # BLUEPRINTS
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    app.register_blueprint(rankings_bp, url_prefix='/api/rankings')
 
     # The whole app will run on the homepage and make API requests to the backend
     # to get information.

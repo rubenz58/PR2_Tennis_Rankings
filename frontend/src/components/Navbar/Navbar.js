@@ -9,7 +9,7 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <h1 className="navbar-title">MyAuthApp</h1>
+            <h1 className="navbar-title">Tennis Rankings</h1>
             
             {user ? (
                 <div className="navbar-user">

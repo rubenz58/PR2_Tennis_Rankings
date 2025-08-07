@@ -6,7 +6,7 @@ from flask import (
     request,
     jsonify
 )
-from .models import User, db
+from models import User, db
 from .utils import (
     hash_password,
     generate_jwt_token,
@@ -95,7 +95,11 @@ def signup():
         hashed_password = hash_password(password)
 
         # 3. Save new User to DB
-        new_user = User(email=email, name=name, password_hash=hashed_password)
+        new_user = User(
+            email=email,
+            name=name,
+            password_hash=hashed_password
+        )
         db.session.add(new_user)
         db.session.commit()
 
