@@ -12,6 +12,8 @@ PART 1.
 Assume "players" table has been created with BeautifulSoup Scraping.
 // > Create Fake DB with random players for testing FR.
 // > Create BK endpoint @ /api/players?params1-10 and make it return object.
-> 
+
+// Now add Frontend
+
 
 PART 2. Implement BeautifulScraping and database autoupdates.

@@ -4,6 +4,7 @@ import { PublicRoute, ProtectedRoute } from "../RouteProtection";
 import LoginForm from "./LoginForm/LoginForm";
 import SignUpForm from "./SignUpForm/SignUpForm";
 import GoogleCallback from "./GoogleCallback";
+import { Rankings } from "../Rankings";
 import { NotFound } from "../IntroComponents";
 import { Dashboard } from "../Dashboard";
 
@@ -32,6 +33,13 @@ const MainContent = () => {
                 }/>
 
                 {/* Protected Routes - redirect to login if not logged in */}
+                <Route path='/rankings' element={
+                    <ProtectedRoute>
+                        <Rankings />
+                    </ProtectedRoute>
+                }/>
+
+                {/* Protected Routes - redirect to login if not logged in */}
                 <Route path='/dashboard' element={
                     <ProtectedRoute>
                         <Dashboard />
@@ -39,7 +47,7 @@ const MainContent = () => {
                 }/>
 
                 {/* Default redirects */}
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route path="/" element={<Navigate to="/rankings" replace />} />
 
                 <Route path="*" element={<NotFound />} />
             </Routes>
