@@ -33,21 +33,21 @@ const MainContent = () => {
                 }/>
 
                 {/* Protected Routes - redirect to login if not logged in */}
-                <Route path='/rankings' element={
-                    <ProtectedRoute>
-                        <Rankings />
-                    </ProtectedRoute>
-                }/>
-
-                {/* Protected Routes - redirect to login if not logged in */}
                 <Route path='/dashboard' element={
                     <ProtectedRoute>
                         <Dashboard />
                     </ProtectedRoute>
                 }/>
 
+                {/* Protected Routes - redirect to login if not logged in */}
+                <Route path='/rankings' element={
+                    <ProtectedRoute>
+                        <Rankings />
+                    </ProtectedRoute>
+                }/>
+
                 {/* Default redirects */}
-                <Route path="/" element={<Navigate to="/rankings" replace />} />
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
                 <Route path="*" element={<NotFound />} />
             </Routes>

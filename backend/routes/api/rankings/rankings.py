@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from models import Player, db
-# from flask_jwt_extended import jwt_required
 from ..authentification.middleware import jwt_required
+import time
 
 
 rankings_bp = Blueprint('rankings', __name__)
@@ -17,6 +17,7 @@ def get_players():
     
     Example: /api/rankings/players?offset=0&limit=20
     """
+    # time.sleep(3)
     try:
         # Get query parameters
         offset = request.args.get('offset', 0, type=int)

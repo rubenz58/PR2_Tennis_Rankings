@@ -32,6 +32,8 @@ export const AuthProvider = ({ children }) => {
 
     // CHECK FOR EXISTING LOGIN ON APP START --> ON EACH PAGE RELOAD
     useEffect(() => { // useEffect itself can't be async
+        // console.log("Loading application");
+        
         const checkExistingAuth = async () => {
 
             if (user) return;  // Skip if user already exists
