@@ -1,5 +1,6 @@
 import './App.css';
 import { AuthProvider } from './contexts/AuthContext';
+import { RankingsProvider } from './contexts/RankingsContext';
 import { BrowserRouter as Router } from "react-router-dom";
 
 /// COMPONENT IMPORT ///
@@ -19,9 +20,11 @@ const AppContent = () => {
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <AppContent/>
-      </Router>
+      <RankingsProvider>
+        <Router>
+          <AppContent/>
+        </Router>
+      </RankingsProvider>
     </AuthProvider>
   );
 }

@@ -14,7 +14,7 @@ export const useAuth = () => {
     if (!context) {
         throw new Error('useAuth must be used within AuthProvider');
     }
-    return context;
+    return context; 
 };
 
 // Create the provider (Component that holds the data)
