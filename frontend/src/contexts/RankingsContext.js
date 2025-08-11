@@ -22,12 +22,14 @@ export const useRankings = () => {
 // Create the provider (Component that holds the data)
 export const RankingsProvider = ({ children }) => {
 
-    const { user, loading: authLoading } = useAuth();
+    const { user, loading: authLoading, token } = useAuth();
 
     // State for authentication
     const [players, setPlayers] = useState({});
     const [nextOffset, setNextOffset] = useState(0);
     const [limit, setLimit] = useState(20);
+    const [hasMore, setHasMore] = useState(false);
+    const [loadingPlayers, setLoadingPlayers] = useState(false);
     
     // Get environment var for API calls
     const API_BASE = process.env.REACT_APP_API_BASE_URL;
@@ -36,57 +38,69 @@ export const RankingsProvider = ({ children }) => {
     useEffect(() => { // useEffect itself can't be async
 
         if (authLoading || !user) return;
-        const fetchPlayers = async () => {
+        fetchPlayers(0, 20);
 
-            // Fetch first 20 players.
-            // Have to include token since it's a protected route
-            const stored_token = localStorage.getItem('token');
+    }, [user, authLoading]);
 
-            if (stored_token) {
-                try {
-                    const response = await fetch(
-                        `${API_BASE}/rankings/players?offset=${nextOffset}&limit=${limit}`, {
-                        headers: {
-                            'Authorization': `Bearer ${stored_token}`,
-                            'Content-Type': 'application/json'
-                        }
-                    });
+    const getNewPlayers = async() => {
+        console.log("Getting new players");
+        fetchPlayers(nextOffset, limit);
+    }
 
-                    // Valid response -> Save players and offset info
-                    if (response.ok) {
-                        // console.log("Got players");
-                        const data = await response.json();
+    const fetchPlayers = async (offset, limit) => {
+        if (loadingPlayers) return; // Don't call if already loading
+        setLoadingPlayers(true);
 
-                        const playersObject = {};
-                        data.players.forEach(player => {
-                            playersObject[player.ranking] = player;
-                        });
-                        setPlayers(prevPlayers => ({
-                            ...prevPlayers,  // Keep existing players
-                            ...playersObject // Add new players
-                        }));
-
-                        setLimit(data.pagination.limit);
-                        setNextOffset(data.pagination.next_offset);
-                    } else {
-                        // Not sure what the else case is
-                        // Response came but isn't good.
+        // Have to include token since it's a protected route
+        if (token) {
+            try {
+                const response = await fetch(
+                    `${API_BASE}/rankings/players?offset=${offset}&limit=${limit}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
                     }
-                } catch (error) {
-                    console.error("Couldn't retrieve players", error);
+                });
+
+                // Valid response -> Save players and offset info
+                if (response.ok) {
+                    // console.log("Got players");
+                    const data = await response.json();
+
+                    const playersObject = {};
+                    data.players.forEach(player => {
+                        playersObject[player.ranking] = player;
+                    });
+                    setPlayers(prevPlayers => ({
+                        ...prevPlayers,  // Keep existing players
+                        ...playersObject // Add new players
+                    }));
+
+                    setLimit(data.pagination.limit);
+                    setNextOffset(data.pagination.next_offset);
+                    setHasMore(data.pagination.has_more);
+                } else {
+                    // Communication was successful, but not allowed
+                    // Ex. Not authorized to access
+                    console.error("Bad response:", response.status);
                 }
+            } catch (error) {
+                // This is network error. Couldn't get a reponse.
+                console.error("Couldn't retrieve players", error);
             }
-        };
+        }
+        setLoadingPlayers(false);
+    };
 
-        fetchPlayers();
-
-    }, [user, authLoading]); // Empty dependency array. Run once on app start
 
     // THIS IS WHAT COMPONENTS CAN ACCESS
     const value = {
         players,
         nextOffset, 
         limit,
+        hasMore,
+        getNewPlayers,
+        loadingPlayers,
     };
 
     return (

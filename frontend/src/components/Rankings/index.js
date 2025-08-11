@@ -1,8 +1,17 @@
 import './Rankings.css';
 import { useRankings } from '../../contexts/RankingsContext';
+import { LoadingSpinner, useInfiniteScroll } from '../FrontEndUtils';
 
 export const Rankings = () => {
-  const { nextOffset, limit, players } = useRankings();
+  // Will rerender anytime useRankings changes.
+  const {
+    players,
+    getNewPlayers,
+    hasMore,
+    loadingPlayers
+  } = useRankings();
+
+  const triggerRef = useInfiniteScroll();
   
   return (
     <div className="rankings-container">
@@ -28,6 +37,10 @@ export const Rankings = () => {
             </div>
           );
         })}
+
+        <div ref={triggerRef} style={{ height: '20px' }}>
+          {loadingPlayers && <LoadingSpinner/>}
+        </div>
       </div>
     </div>
   );

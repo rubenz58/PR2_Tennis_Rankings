@@ -5,7 +5,7 @@ import LoginForm from "./LoginForm/LoginForm";
 import SignUpForm from "./SignUpForm/SignUpForm";
 import GoogleCallback from "./GoogleCallback";
 import { Rankings } from "../Rankings";
-import { NotFound } from "../IntroComponents";
+import { NotFound } from "../FrontEndUtils";
 import { Dashboard } from "../Dashboard";
 
 
@@ -47,7 +47,7 @@ const MainContent = () => {
                 }/>
 
                 {/* Default redirects */}
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route path="/" element={<Navigate to="/rankings" replace />} />
 
                 <Route path="*" element={<NotFound />} />
             </Routes>
