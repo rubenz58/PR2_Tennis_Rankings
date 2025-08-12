@@ -106,6 +106,17 @@ def parse_rankings_html(html_content):
     if ranking_rows:
         print(f"Found {len(ranking_rows)} table rows, attempting to parse...")
         players_data = parse_table_structure(ranking_rows)
+
+    seen_ranks = set()
+    unique_players = []
+    for player in players_data:
+        if player['rank'] not in seen_ranks:
+            unique_players.append(player)
+            seen_ranks.add(player['rank'])
+
+    return unique_players
+    
+    return players_data
     
     # If no data found, try approach 2: Look for div-based structure
     if not players_data:
@@ -238,6 +249,41 @@ def parse_div_structure(divs):
     
     return players_data
 
+def save_players_to_db(players_data):
+    """
+    Save player data to the database
+    """
+    app = create_app()
+    
+    with app.app_context():
+        try:
+            # Clear existing data more explicitly
+            print("Clearing existing player data...")
+            db.session.query(Player).delete()
+            db.session.commit()  # Commit the deletion immediately
+            print("Existing data cleared successfully")
+            
+            # Add new players
+            print("Adding new player data...")
+            for player_data in players_data:
+                player = Player(
+                    ranking=player_data['rank'],  # Changed from 'rank' to 'ranking'
+                    name=player_data['name'],
+                    points=player_data['points']
+                )
+                db.session.add(player)
+            
+            # Commit all changes
+            db.session.commit()
+            print(f"Successfully saved {len(players_data)} players to database")
+            
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error saving to database: {e}")
+            raise
+
+
+
 
 def main():
     print("=== ATP Rankings Scraper ===")
@@ -255,6 +301,7 @@ def main():
         with open(html_file, 'r', encoding='utf-8') as f:
             html_content = f.read()
         players_data = parse_rankings_html(html_content)
+        save_players_to_db(players_data)
     else:
         print(f"HTML file {html_file} not found. Fetching live data...")
         # Option 2: Fetch live data with Selenium
