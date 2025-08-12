@@ -14,6 +14,15 @@ Assume "players" table has been created with BeautifulSoup Scraping.
 // > Create BK endpoint @ /api/players?params1-10 and make it return object.
 
 // Now add Frontend
-
+// > Create Rankings page with infinite scroll
 
 PART 2. Implement BeautifulScraping and database autoupdates.
+> Implement BeatifulSoup Scraping from main ATP page.
+> Database updates automatically
+
+PART 3.
+> Deploy.
+
+
+BUGS:
+> On login. Check gears and login spinners.

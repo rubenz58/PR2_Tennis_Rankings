@@ -1,3 +1,5 @@
+# Populates 'players' with stock data to test frontend.
+
 from app import create_app
 from models import Player, db
 

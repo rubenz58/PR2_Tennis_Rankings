@@ -19,7 +19,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <div className={`dashboard-container ${oAuthLoading ? 'dashboard-container-loading' : ''}`}>
+    <div className={`dashboard-container ${isLoading ? 'dashboard-container-loading' : ''}`}>
       {/* Header with title and logout */}
       <div className="dashboard-header">
         <h1 className="dashboard-title">Dashboard</h1>

@@ -17,6 +17,10 @@ flask-migrate = "*"
 google-auth = "*"
 google-auth-oauthlib = "*"
 google-auth-httplib2 = "*"
+selenium = "*"
+beautifulsoup4 = "*"
+requests = "*"
+webdriver-manager = "*"
 
 [dev-packages]
 python-dotenv = "*"

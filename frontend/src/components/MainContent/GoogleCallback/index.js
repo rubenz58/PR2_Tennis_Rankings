@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 
 import { Dashboard } from "../../Dashboard";
+import { Rankings } from "../../Rankings";
 
 const GoogleCallback = () => {
 
     const [error, setError] = useState(null);
-    const { setUser, setToken, setOAuthLoading } = useAuth();
+    const { setUser, setToken, setOAuthLoading, setLoading } = useAuth();
     const navigate = useNavigate();
     const hasProcessed = useRef(false); // Value persists across renders
 
@@ -19,6 +20,7 @@ const GoogleCallback = () => {
             hasProcessed.current = true;
 
             setOAuthLoading(true);
+            setLoading(true); // To remove if chaos
 
             try {
                 // Get the parameters. Code is parsed correctly by URLSearchParams
@@ -57,7 +59,9 @@ const GoogleCallback = () => {
 
                     // Redirect to dashboard.
                     // Replace skips the previous callback URL
-                    navigate('/dashboard', { replace : true });
+                    setOAuthLoading(false);
+                    setLoading(false);
+                    navigate('/rankings', { replace : true });
                 } else {
                     setError(data.error || 'Google login failed');
                     setOAuthLoading(false);
@@ -77,7 +81,7 @@ const GoogleCallback = () => {
         return <div>Error: {error}</div>;
     }
 
-    return <Dashboard/>;
+    return <Rankings/>;
 }
 
 export default GoogleCallback;

@@ -8,10 +8,26 @@ export const Rankings = () => {
     players,
     getNewPlayers,
     hasMore,
-    loadingPlayers
+    loadingPlayers,
   } = useRankings();
 
   const triggerRef = useInfiniteScroll();
+
+  // if (loadingPlayers && Object.keys(players).length === 0) {
+  //   console.log("LOADING");
+  //   return (
+  //     <div className="rankings-container">
+  //       <div className="rankings-header">
+  //         <h1 className="rankings-title">ATP Rankings</h1>
+  //         <div className="rankings-count">Loading...</div>
+  //       </div>
+  //       <div className="rankings-loading">
+  //         <div className="rankings-loading-spinner"></div>
+  //         <div className="rankings-loading-text">Loading tennis rankings...</div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
   
   return (
     <div className="rankings-container">

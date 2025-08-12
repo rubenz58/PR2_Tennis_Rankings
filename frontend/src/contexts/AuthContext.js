@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     const API_BASE = process.env.REACT_APP_API_BASE_URL;
     // const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
-    // CHECK FOR EXISTING LOGIN ON APP START --> ON EACH PAGE RELOAD
+    // CHECK FOR EXISTING LOGIN ON EACH PAGE RELOAD
     useEffect(() => { // useEffect itself can't be async
         // console.log("Loading application");
         
@@ -75,6 +75,8 @@ export const AuthProvider = ({ children }) => {
     // Fetches Google Auth Url from BKND.
     const loginWithGoogle = async() => {
         console.log("google login attempt");
+        setLoading(true);
+        setOAuthLoading(true);
 
         try {
             // 'await' pauses the function at this line
