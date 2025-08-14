@@ -1,7 +1,8 @@
-from flask import Flask
+from flask import Flask, send_file
 from flask_cors import CORS
 from config import Config
 from flask_migrate import Migrate
+import os
 
 from routes.api.authentification.authentification import auth_bp
 from routes.api.rankings.rankings import rankings_bp
@@ -11,7 +12,7 @@ from utils.logging_config import setup_logging
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='build', static_url_path='')
     app.config.from_object(Config)
 
     # Initialize CORS
@@ -31,11 +32,37 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(rankings_bp, url_prefix='/api/rankings')
 
-    # The whole app will run on the homepage and make API requests to the backend
-    # to get information.
-    @app.route('/')
-    def hello():
-        return "Hello World! Flask is running"
+    # SERVE REACT
+    def serve_react_app():
+        """Serve the React app's index.html file"""
+        try:
+            return send_file(os.path.join(app.static_folder, 'index.html'))
+        except FileNotFoundError:
+            return """
+            <h1>React App Not Built</h1>
+            <p>Run <code>npm run build</code> in your frontend directory first.</p>
+            """, 404
+        
+    # Remove your old hello route and replace with:
+    @app.route('/', defaults={'path': ''})
+    @app.route('/<path:path>')
+    def catch_all(path):
+        """Catch-all route for React SPA"""
+        # Don't serve React app for API routes
+        if path.startswith('api/'):
+            return {'error': 'API endpoint not found'}, 404
+        
+        # Serve React app for all other routes
+        return serve_react_app()
+    
+    @app.errorhandler(404)
+    def not_found(error):
+        """Custom 404 handler"""
+        from flask import request
+        if request.path.startswith('/api/'):
+            return {'error': 'API endpoint not found'}, 404
+        else:
+            return serve_react_app()
     
     # Create database tables
     with app.app_context():
