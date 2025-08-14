@@ -6,6 +6,8 @@ from flask_migrate import Migrate
 from routes.api.authentification.authentification import auth_bp
 from routes.api.rankings.rankings import rankings_bp
 from models import db
+from utils.logging_config import setup_logging
+
 
 
 def create_app():
@@ -38,10 +40,19 @@ def create_app():
     # Create database tables
     with app.app_context():
         db.create_all()
+
+    # Initialize logging FIRST
+    setup_logging(app)
+    
+    # Then start scheduler
+    with app.app_context():
+        from tasks.scheduler import start_scheduler
+        start_scheduler()
     
     return app
 
 
 if __name__ == '__main__':
     app = create_app()
+    # Actually makes the server run.
     app.run(host='0.0.0.0', port=5002, debug=True)

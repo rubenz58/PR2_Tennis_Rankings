@@ -107,17 +107,6 @@ def parse_rankings_html(html_content):
         print(f"Found {len(ranking_rows)} table rows, attempting to parse...")
         players_data = parse_table_structure(ranking_rows)
 
-    seen_ranks = set()
-    unique_players = []
-    for player in players_data:
-        if player['rank'] not in seen_ranks:
-            unique_players.append(player)
-            seen_ranks.add(player['rank'])
-
-    return unique_players
-    
-    return players_data
-    
     # If no data found, try approach 2: Look for div-based structure
     if not players_data:
         print("No data in table rows, trying div-based structure...")
@@ -138,7 +127,15 @@ def parse_rankings_html(html_content):
         print(html_content[:1000])
     
     print(f"\nSuccessfully parsed {len(players_data)} players")
-    return players_data
+    
+    seen_ranks = set()
+    unique_players = []
+    for player in players_data:
+        if player['rank'] not in seen_ranks:
+            unique_players.append(player)
+            seen_ranks.add(player['rank'])
+
+    return unique_players
 
 def parse_table_structure(rows):
     """
@@ -289,11 +286,7 @@ def main():
     print("=== ATP Rankings Scraper ===")
     print("Starting initial data population...\n")
 
-    # Run once to save
-    print("=== ATP Rankings Scraper (with Selenium) ===")
-    print("Starting initial data population...\n")
-    
-    # Option 1: Use saved HTML file (for testing parsing logic)
+    # Option 1: Use saved HTML file (for testing parsing logic and first DB population)
     html_file = 'scripts/rankings_html/atp_rankings_selenium.html'
     
     if os.path.exists(html_file):
