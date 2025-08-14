@@ -1,8 +1,8 @@
+import os
 from flask import Flask, send_file
 from flask_cors import CORS
 from config import Config
 from flask_migrate import Migrate
-import os
 
 from routes.api.authentification.authentification import auth_bp
 from routes.api.rankings.rankings import rankings_bp
@@ -15,9 +15,17 @@ def create_app():
     app = Flask(__name__, static_folder='build', static_url_path='')
     app.config.from_object(Config)
 
+    # CORS configuration based on environment
+    if app.config.get('DEBUG'):
+        # Development: Allow React dev server
+        cors_origins = ['http://localhost:3000', 'http://localhost:3001']
+    else:
+        # Production: Same origin only (Flask serves React)
+        cors_origins = []
+
     # Initialize CORS
     CORS(app,
-         origins=['http://localhost:3000'], # React App Url
+         origins=cors_origins, # React App Url
          allow_headers=['Content-type', 'Authorization'], # Allow JWT headers
          methods=['GET', 'POST', 'PUT', 'DELETE'], # Allowed HTTP methods
          supports_credentials=True) # Allow cookies later if needed
@@ -80,6 +88,9 @@ def create_app():
 
 
 if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 5000))
     app = create_app()
     # Actually makes the server run.
-    app.run(host='0.0.0.0', port=5002, debug=True)
+    # PRODUCTION: app.run(host='0.0.0.0', port=5002, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=False)
