@@ -32,7 +32,7 @@ export const RankingsProvider = ({ children }) => {
     const [loadingPlayers, setLoadingPlayers] = useState(false);
     
     // Get environment var for API calls
-    const API_BASE = process.env.REACT_APP_API_BASE_URL;
+    const API_BASE = process.env.REACT_APP_API_BASE_URL || "";
 
     // CHECK FOR EXISTING PLAYERS on first page load --> ON EACH PAGE RELOAD
     useEffect(() => { // useEffect itself can't be async
