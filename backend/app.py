@@ -22,10 +22,15 @@ def create_app():
 if __name__ == '__main__':
     import os
     port = int(os.environ.get('PORT', 5000))
+    print("Creating Flask app...")
     app = create_app()
+    print("Flask app created successfully")
+
 
     # Moved db and other initialization so that Railway
     # can serve app immediately.
+    # Not passing Railway healthcheck but Railway has a permissive
+    # approach.
     # CORS configuration based on environment
     if app.config.get('DEBUG'):
         # Development: Allow React dev server
@@ -84,14 +89,23 @@ if __name__ == '__main__':
     
     # Create database tables
     with app.app_context():
+        print("Creating database tables...")
         db.create_all()
+        print("Database tables created")
+
 
     # Initialize logging FIRST
+    print("Setting up logging...")
     setup_logging(app)
+    print("Logging setup complete")
+
     
     # Then start scheduler
     with app.app_context():
+        print("Starting scheduler...")
         start_scheduler()
+        print("Scheduler started")
+
 
     # Check if database needs initial population
     with app.app_context():
