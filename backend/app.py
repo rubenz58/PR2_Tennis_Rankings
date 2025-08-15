@@ -6,8 +6,9 @@ from flask_migrate import Migrate
 
 from routes.api.authentification.authentification import auth_bp
 from routes.api.rankings.rankings import rankings_bp
-from models import db
+from models import db, Player
 from utils.logging_config import setup_logging
+from tasks.scheduler import start_scheduler
 
 
 
@@ -51,7 +52,6 @@ def create_app():
             <p>Run <code>npm run build</code> in your frontend directory first.</p>
             """, 404
         
-    # Remove your old hello route and replace with:
     @app.route('/', defaults={'path': ''})
     @app.route('/<path:path>')
     def catch_all(path):
@@ -81,8 +81,16 @@ def create_app():
     
     # Then start scheduler
     with app.app_context():
-        from tasks.scheduler import start_scheduler
         start_scheduler()
+
+    # Check if database needs initial population
+    with app.app_context():
+        
+        # If no players exist, populate database
+        if Player.query.count() == 0:
+            print("Database is empty - triggering initial population...")
+            from app.tasks.scheduler import trigger_manual_update
+            trigger_manual_update()
     
     return app
 
