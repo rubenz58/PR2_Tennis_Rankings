@@ -8,7 +8,7 @@ from routes.api.authentification.authentification import auth_bp
 from routes.api.rankings.rankings import rankings_bp
 from models import db, Player
 from utils.logging_config import setup_logging
-from tasks.scheduler import start_scheduler
+from tasks.scheduler import start_scheduler, trigger_manual_update
 
 
 
@@ -89,7 +89,6 @@ def create_app():
         # If no players exist, populate database
         if Player.query.count() == 0:
             print("Database is empty - triggering initial population...")
-            from app.tasks.scheduler import trigger_manual_update
             trigger_manual_update()
     
     return app
