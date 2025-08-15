@@ -75,14 +75,15 @@ RUN if [ ! -d "build" ]; then echo "ERROR: build/ folder not found! Run 'npm run
 # Create logs directory
 RUN mkdir -p logs
 
+# Wrong. Port Mismatch. Railway sets it to 8080.
 # Expose port 5000 for Flask
-EXPOSE 5000
+# EXPOSE 5000
 
 # Set environment variables
 ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
 ENV PYTHONPATH=/app
-ENV PORT=5000
+# ENV PORT=5000
 
 # Command to run the application
 CMD ["python", "app.py"]
