@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
             if (stored_token) {
                 try {
                     // Verify token is still valid by calling /me endpoint
-                    const response = await fetch(`${API_BASE}/auth/me`, {
+                    const response = await fetch(`${API_BASE}/api/auth/me`, {
                         headers: {
                             'Authorization': `Bearer ${stored_token}`,
                             'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ export const AuthProvider = ({ children }) => {
             // 'await' pauses the function at this line
             // Browser and other parts of website (user clicking etc)
             // can keep going.
-            const response = await fetch(`${API_BASE}/auth/google/login`);
+            const response = await fetch(`${API_BASE}/api/auth/google/login`);
             const { auth_url } = await response.json();
 
             // Redirect to data["auth_url"]
@@ -107,7 +107,7 @@ export const AuthProvider = ({ children }) => {
             // 'await' pauses the function at this line
             // Browser and other parts of website (user clicking etc)
             // can keep going.
-            const response = await fetch(`${API_BASE}/auth/login`, {
+            const response = await fetch(`${API_BASE}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -142,7 +142,7 @@ export const AuthProvider = ({ children }) => {
             // 'await' pauses the function at this line
             // Browser and other parts of website (user clicking etc)
             // can keep going.
-            const response = await fetch(`${API_BASE}/auth/signup`, {
+            const response = await fetch(`${API_BASE}/api/auth/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

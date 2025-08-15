@@ -55,7 +55,7 @@ export const RankingsProvider = ({ children }) => {
         if (token) {
             try {
                 const response = await fetch(
-                    `${API_BASE}/rankings/players?offset=${offset}&limit=${limit}`, {
+                    `${API_BASE}/api/rankings/players?offset=${offset}&limit=${limit}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
