@@ -1,36 +1,36 @@
 # Minimal test version of app.py
+# import os
+# from flask import Flask, jsonify
+
+# def create_app():
+#     app = Flask(__name__)
+    
+#     @app.route('/')
+#     def home():
+#         return jsonify({
+#             'status': 'success',
+#             'message': 'Tennis Rankings App is running!',
+#             'port': os.environ.get('PORT', 'not set'),
+#             'host': '0.0.0.0'
+#         })
+    
+#     @app.route('/health')
+#     def health():
+#         return jsonify({'health': 'ok'})
+    
+#     return app
+
+# if __name__ == '__main__':
+#     port = int(os.environ.get('PORT', 5000))
+    
+#     print(f"Creating minimal Flask app on port {port}...")
+#     app = create_app()
+#     print("Minimal Flask app created successfully")
+    
+#     print(f"Starting server on 0.0.0.0:{port}")
+#     app.run(host='0.0.0.0', port=port, debug=False)
+
 import os
-from flask import Flask, jsonify
-
-def create_app():
-    app = Flask(__name__)
-    
-    @app.route('/')
-    def home():
-        return jsonify({
-            'status': 'success',
-            'message': 'Tennis Rankings App is running!',
-            'port': os.environ.get('PORT', 'not set'),
-            'host': '0.0.0.0'
-        })
-    
-    @app.route('/health')
-    def health():
-        return jsonify({'health': 'ok'})
-    
-    return app
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    
-    print(f"Creating minimal Flask app on port {port}...")
-    app = create_app()
-    print("Minimal Flask app created successfully")
-    
-    print(f"Starting server on 0.0.0.0:{port}")
-    app.run(host='0.0.0.0', port=port, debug=False)
-
-""" import os
 from flask import Flask, send_file
 from flask_cors import CORS
 from config import Config
@@ -116,4 +116,4 @@ if __name__ == '__main__':
     
     print(f"Starting Flask server on port {port}...")
     app.run(host='0.0.0.0', port=port, debug=False)
-    # PRODUCTION: app.run(host='0.0.0.0', port=5002, debug=True) """
+    # PRODUCTION: app.run(host='0.0.0.0', port=5002, debug=True)
