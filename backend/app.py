@@ -15,7 +15,17 @@ from tasks.scheduler import start_scheduler, trigger_manual_update
 def create_app():
     app = Flask(__name__, static_folder='build', static_url_path='')
     app.config.from_object(Config)
+    
+    return app
 
+
+if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app = create_app()
+
+    # Moved db and other initialization so that Railway
+    # can serve app immediately.
     # CORS configuration based on environment
     if app.config.get('DEBUG'):
         # Development: Allow React dev server
@@ -90,14 +100,7 @@ def create_app():
         if Player.query.count() == 0:
             print("Database is empty - triggering initial population...")
             trigger_manual_update()
-    
-    return app
 
-
-if __name__ == '__main__':
-    import os
-    port = int(os.environ.get('PORT', 5000))
-    app = create_app()
     # Actually makes the server run.
     # PRODUCTION: app.run(host='0.0.0.0', port=5002, debug=True)
     app.run(host='0.0.0.0', port=port, debug=False)
