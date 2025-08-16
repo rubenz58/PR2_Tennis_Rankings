@@ -70,7 +70,7 @@ const LoginForm = () => {
             )}
 
             {/* Google Login button */}
-            <button
+            {/*<button
                 type="button"
                 onClick={handleGoogleLogin}
                 disabled={loading}
@@ -81,7 +81,7 @@ const LoginForm = () => {
             </button>
             <div className="form-divider">
                 <span>or</span>
-            </div>
+            </div>*/}
 
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
