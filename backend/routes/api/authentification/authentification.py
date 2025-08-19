@@ -42,6 +42,14 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route("/signup", methods=["POST"])
 def signup():
 
+    print(f"🚨 SIGNUP ROUTE CALLED: {request.method}")
+    
+    # if request.method == 'OPTIONS':
+    #     print("🚨 HANDLING OPTIONS REQUEST")
+    #     return '', 200
+    
+    print("🚨 HANDLING POST REQUEST")
+
     data = request.get_json()
 
     if not data:

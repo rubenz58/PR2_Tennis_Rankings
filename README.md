@@ -24,3 +24,6 @@ Notes:
 To Add:
 - Clicking on players.
 - Email Verification
+- Password change
+
+// Will have to trigger manual update for DB.

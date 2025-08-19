@@ -6,7 +6,7 @@ from ..api.authentification.middleware import jwt_required
 admin_bp = Blueprint('admin', __name__)
 
 @admin_bp.route('/logs', methods=['GET'])
-@jwt_required
+# @jwt_required
 def view_logs():
     """View log files - REMOVE in production!"""
     import os
