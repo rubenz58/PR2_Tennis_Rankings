@@ -27,9 +27,8 @@ export const AuthProvider = ({ children }) => {
     const [oAuthLoading, setOAuthLoading] = useState(false);
 
     // Get environment var for API calls
-    const API_BASE = process.env.REACT_APP_API_BASE_URL || "";
-    // const API_BASE="http://localhost:5002";
-    console.log("API_BASE: ", API_BASE);
+    const BASE_URL = process.env.REACT_APP_BASE_URL || "";
+    console.log("BASE_URL: ", BASE_URL);
     // const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
     // CHECK FOR EXISTING LOGIN ON EACH PAGE RELOAD
@@ -45,7 +44,7 @@ export const AuthProvider = ({ children }) => {
             if (stored_token) {
                 try {
                     // Verify token is still valid by calling /me endpoint
-                    const response = await fetch(`${API_BASE}/api/auth/me`, {
+                    const response = await fetch(`${BASE_URL}/api/auth/me`, {
                         headers: {
                             'Authorization': `Bearer ${stored_token}`,
                             'Content-Type': 'application/json'
@@ -84,7 +83,7 @@ export const AuthProvider = ({ children }) => {
             // 'await' pauses the function at this line
             // Browser and other parts of website (user clicking etc)
             // can keep going.
-            const response = await fetch(`${API_BASE}/api/auth/google/login`);
+            const response = await fetch(`${BASE_URL}/api/auth/google/login`);
             const { auth_url } = await response.json();
 
             // Redirect to data["auth_url"]
@@ -109,7 +108,7 @@ export const AuthProvider = ({ children }) => {
             // 'await' pauses the function at this line
             // Browser and other parts of website (user clicking etc)
             // can keep going.
-            const response = await fetch(`${API_BASE}/api/auth/login`, {
+            const response = await fetch(`${BASE_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -144,7 +143,7 @@ export const AuthProvider = ({ children }) => {
             // 'await' pauses the function at this line
             // Browser and other parts of website (user clicking etc)
             // can keep going.
-            const response = await fetch(`${API_BASE}/api/auth/signup`, {
+            const response = await fetch(`${BASE_URL}/api/auth/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

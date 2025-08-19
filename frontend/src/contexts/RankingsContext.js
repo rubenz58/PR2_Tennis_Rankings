@@ -32,7 +32,7 @@ export const RankingsProvider = ({ children }) => {
     const [loadingPlayers, setLoadingPlayers] = useState(false);
     
     // Get environment var for API calls
-    const API_BASE = process.env.REACT_APP_API_BASE_URL || "";
+    const BASE_URL = process.env.REACT_APP_BASE_URL || "";
 
     // CHECK FOR EXISTING PLAYERS on first page load --> ON EACH PAGE RELOAD
     useEffect(() => { // useEffect itself can't be async
@@ -55,7 +55,7 @@ export const RankingsProvider = ({ children }) => {
         if (token) {
             try {
                 const response = await fetch(
-                    `${API_BASE}/api/rankings/players?offset=${offset}&limit=${limit}`, {
+                    `${BASE_URL}/api/rankings/players?offset=${offset}&limit=${limit}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
