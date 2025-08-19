@@ -1,35 +1,3 @@
-# Minimal test version of app.py
-# import os
-# from flask import Flask, jsonify
-
-# def create_app():
-#     app = Flask(__name__)
-    
-#     @app.route('/')
-#     def home():
-#         return jsonify({
-#             'status': 'success',
-#             'message': 'Tennis Rankings App is running!',
-#             'port': os.environ.get('PORT', 'not set'),
-#             'host': '0.0.0.0'
-#         })
-    
-#     @app.route('/health')
-#     def health():
-#         return jsonify({'health': 'ok'})
-    
-#     return app
-
-# if __name__ == '__main__':
-#     port = int(os.environ.get('PORT', 5000))
-    
-#     print(f"Creating minimal Flask app on port {port}...")
-#     app = create_app()
-#     print("Minimal Flask app created successfully")
-    
-#     print(f"Starting server on 0.0.0.0:{port}")
-#     app.run(host='0.0.0.0', port=port, debug=False)
-
 import os
 from flask import Flask, send_file
 from flask_cors import CORS
@@ -38,6 +6,7 @@ from flask_migrate import Migrate
 
 from routes.api.authentification.authentification import auth_bp
 from routes.api.rankings.rankings import rankings_bp
+from routes.admin.admin import admin_bp
 from models import db, Player
 from utils.logging_config import setup_logging
 from tasks.scheduler import start_scheduler, trigger_manual_update
@@ -67,6 +36,7 @@ def create_app():
     # Blueprints
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(rankings_bp, url_prefix='/api/rankings')
+    app.register_blueprint(admin_bp, url_prefix='/admin')
     
     # React serving routes
     def serve_react_app():
