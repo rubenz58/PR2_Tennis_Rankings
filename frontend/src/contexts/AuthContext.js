@@ -28,6 +28,8 @@ export const AuthProvider = ({ children }) => {
 
     // Get environment var for API calls
     const API_BASE = process.env.REACT_APP_API_BASE_URL || "";
+    // const API_BASE="http://localhost:5002";
+    console.log("API_BASE: ", API_BASE);
     // const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
     // CHECK FOR EXISTING LOGIN ON EACH PAGE RELOAD
