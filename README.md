@@ -27,3 +27,4 @@ To Add:
 - Password change
 
 // Will have to trigger manual update for DB.
+Have to add myself as the is_admin super user.
