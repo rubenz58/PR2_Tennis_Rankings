@@ -1,9 +1,9 @@
 // GoogleCallback
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../contexts/AuthContext";
 
-import { Dashboard } from "../../Dashboard";
+import { useAuth } from "../../../../contexts/AuthContext";
+
 import { Rankings } from "../../Rankings";
 
 const GoogleCallback = () => {

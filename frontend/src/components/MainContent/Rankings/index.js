@@ -1,6 +1,6 @@
 import './Rankings.css';
-import { useRankings } from '../../contexts/RankingsContext';
-import { LoadingSpinner, useInfiniteScroll } from '../FrontEndUtils';
+import { useRankings } from '../../../contexts/RankingsContext';
+import { LoadingSpinner, useInfiniteScroll } from '../../FrontEndUtils';
 
 export const Rankings = () => {
   // Will rerender anytime useRankings changes.

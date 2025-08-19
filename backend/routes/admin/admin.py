@@ -54,7 +54,7 @@ def read_log_file_json(file_path, lines_to_show=50):
             'exists': True
         }
 
-@admin_bp.route('/api/logs', methods=['GET'])
+@admin_bp.route('/logs', methods=['GET'])
 @jwt_required
 @admin_required
 def get_logs_overview():
@@ -123,7 +123,7 @@ def get_logs_overview():
         }
     })
 
-@admin_bp.route('/api/logs/app', methods=['GET'])
+@admin_bp.route('/logs/app', methods=['GET'])
 @jwt_required
 @admin_required
 def get_app_logs():
@@ -139,7 +139,7 @@ def get_app_logs():
     
     return jsonify(log_data)
 
-@admin_bp.route('/api/logs/errors', methods=['GET'])
+@admin_bp.route('/logs/errors', methods=['GET'])
 @jwt_required
 @admin_required
 def get_error_logs():
@@ -154,7 +154,7 @@ def get_error_logs():
     
     return jsonify(log_data)
 
-@admin_bp.route('/api/logs/scraping', methods=['GET'])
+@admin_bp.route('/logs/scraping', methods=['GET'])
 @jwt_required
 @admin_required
 def get_scraping_logs():
@@ -171,7 +171,7 @@ def get_scraping_logs():
 
 # Optional: Real-time log streaming endpoint
 # GET /admin/api/logs/<type>/tail?lines=20
-@admin_bp.route('/api/logs/<log_type>/tail', methods=['GET'])
+@admin_bp.route('/logs/<log_type>/tail', methods=['GET'])
 @jwt_required
 @admin_required
 def tail_logs(log_type):

@@ -1,12 +1,15 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { PublicRoute, ProtectedRoute } from "../RouteProtection";
 
-import LoginForm from "./LoginForm/LoginForm";
-import SignUpForm from "./SignUpForm/SignUpForm";
-import GoogleCallback from "./GoogleCallback";
-import { Rankings } from "../Rankings";
+import LoginForm from "./Authentication/LoginForm/LoginForm";
+import SignUpForm from "./Authentication/SignUpForm/SignUpForm";
+import GoogleCallback from "./Authentication/GoogleCallback";
+
+import { Rankings } from "./Rankings";
 import { NotFound } from "../FrontEndUtils";
-import { Dashboard } from "../Dashboard";
+import { Dashboard } from "./Dashboard";
+
+import Admin from "./Admin";
 
 
 const MainContent = () => {
@@ -43,6 +46,13 @@ const MainContent = () => {
                 <Route path='/rankings' element={
                     <ProtectedRoute>
                         <Rankings />
+                    </ProtectedRoute>
+                }/>
+
+                {/* Protected Routes - redirect to login if not logged in */}
+                <Route path='/admin' element={
+                    <ProtectedRoute>
+                        <Admin />
                     </ProtectedRoute>
                 }/>
 

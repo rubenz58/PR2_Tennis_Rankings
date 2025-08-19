@@ -99,7 +99,7 @@ if __name__ == '__main__':
     print()
     
     # SET USER ID HERE
-    USER_ID_TO_MAKE_ADMIN = 7
+    USER_ID_TO_MAKE_ADMIN = 14
     
     # Or use email instead (comment out the ID line above and uncomment below)
     # USER_EMAIL_TO_MAKE_ADMIN = "your-email@example.com"
