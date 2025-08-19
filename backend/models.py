@@ -20,6 +20,9 @@ class User(db.Model):
     google_id = db.Column(db.String(100), unique=True, nullable=True)
     auth_method = db.Column(db.String(20), nullable=False, default="email")
 
+    is_admin = db.Column(db.Boolean, default=False, nullable=False)
+
+
     def __repr__(self):
         return f"<User {self.email}>"
     
@@ -30,6 +33,7 @@ class User(db.Model):
             "email": self.email,
             "name": self.name,
             "auth_method": self.auth_method,
+            'is_admin': self.is_admin,
             "created_at": self.created_at
         }
 
