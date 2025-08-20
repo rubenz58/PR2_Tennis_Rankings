@@ -26,5 +26,5 @@ To Add:
 - Email Verification
 - Password change
 
-// Will have to trigger manual update for DB.
-Have to add myself as the is_admin super user.
+// Will have to trigger manual update for DB. > Worked
+// Have to add myself as the is_admin super user. > Done

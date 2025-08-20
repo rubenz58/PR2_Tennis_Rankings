@@ -212,10 +212,15 @@ def scheduler_status():
         return {'error': str(e)}
     
 @admin_bp.route('/trigger-manual-update')
+@jwt_required
+@admin_required
 def players_manual_update():
     """Trigger Manual Update of ATP Players Table"""
     try:
         trigger_manual_update()
+        # All Flask routes need to return
+        return {'success': True, 'message': 'Manual update completed successfully'}
+
     except Exception as e:
         print("Manual Update Failed")
-        return {'error': str(e)}
+        return {'success': False, 'error': str(e)}
