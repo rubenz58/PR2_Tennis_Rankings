@@ -4,10 +4,10 @@ import React, {
     useState,
     useEffect,
 } from "react";
-
+ 
 // Create the context
 const AuthContext = createContext();
-
+ 
 // Create hook to easily use context
 export const useAuth = () => {
     const context = useContext(AuthContext);
@@ -31,10 +31,14 @@ export const AuthProvider = ({ children }) => {
 
     // Get environment var for API calls
     const BASE_URL = process.env.REACT_APP_BASE_URL || "";
-    console.log("BASE_URL: ", BASE_URL);
+    // console.log("BASE_URL: ", BASE_URL);
 
     // Helper function for authenticated API calls
     const makeAuthenticatedRequest = async (url, options = {}) => {
+        console.log('🔍 Making request to:', `${BASE_URL}${url}`);
+        console.log('🔍 Token exists:', !!token);
+        console.log('🔍 Token preview:', token ? token.substring(0, 30) + '...' : 'NO TOKEN');
+
         if (!token) {
             throw new Error('No authentication token available');
         }

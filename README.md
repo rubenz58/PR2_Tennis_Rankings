@@ -22,9 +22,12 @@ Notes:
 
 
 To Add:
+> Persistent Logs across Railway deployments.
 - Clicking on players.
 - Email Verification
 - Password change
 
 // Will have to trigger manual update for DB. > Worked
 // Have to add myself as the is_admin super user. > Done
+
+> Redeploying
