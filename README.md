@@ -30,4 +30,4 @@ To Add:
 // Will have to trigger manual update for DB. > Worked
 // Have to add myself as the is_admin super user. > Done
 
-> Redeploying
+> Redeploying 2
