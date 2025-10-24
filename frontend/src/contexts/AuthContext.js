@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
         if (!response.ok) {
             if (response.status === 401) {
                 // Token expired, logout user
-                logout();
+                // logout();
                 throw new Error('Authentication expired. Please log in again.');
             }
             throw new Error(`API call failed: ${response.statusText}`);
@@ -256,13 +256,13 @@ export const AuthProvider = ({ children }) => {
         setUser,
         setToken,
         setLoading,
-        login,
-        signup,
-        logout,
-        loginWithGoogle,
-        signupWithGoogle,
-        oAuthLoading,
-        setOAuthLoading,
+        // login,
+        // signup,
+        // logout,
+        // loginWithGoogle,
+        // signupWithGoogle,
+        // oAuthLoading,
+        // setOAuthLoading,
 
         // Admin-specific values and functions
         isAdmin,
