@@ -7,7 +7,7 @@ import time
 rankings_bp = Blueprint('rankings', __name__)
 
 @rankings_bp.route('/players', methods=['GET'])
-@jwt_required  # Require authentication to access rankings
+# @jwt_required  # Require authentication to access rankings
 def get_players():
     """
     Get players with pagination
