@@ -76,7 +76,7 @@ COPY backend/Pipfile backend/Pipfile.lock ./
 RUN pip install pipenv && \
     pipenv install --system --deploy
 # Copy the backend application (excluding build folder for now)
-COPY . .
+COPY backend/ .
 # Copy the built frontend from the frontend-build stage
 COPY --from=frontend-build /app/frontend/build ./build
 # Create logs directory
