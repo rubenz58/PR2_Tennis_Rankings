@@ -135,7 +135,7 @@ const Admin = () => {
                 <div className="header-content">
                     <div className="header-info">
                         <h1 className="header-title">Admin Dashboard</h1>
-                        <p className="header-subtitle">Welcome, {user.name}</p>
+                        {/* <p className="header-subtitle">Welcome, {user.name}</p> */}
                     </div>
                     <div className="tab-navigation">
                         <button
