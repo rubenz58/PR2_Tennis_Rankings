@@ -59,6 +59,7 @@ RUN apt-get update && apt-get install -y \
     lsb-release \
     xdg-utils \
     && rm -rf /var/lib/apt/lists/*
+    
 # Install Google Chrome
 RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && dpkg -i google-chrome-stable_current_amd64.deb || true \
