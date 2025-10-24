@@ -59,7 +59,7 @@ RUN apt-get update && apt-get install -y \
     lsb-release \
     xdg-utils \
     && rm -rf /var/lib/apt/lists/*
-    
+
 # Install Google Chrome
 RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && dpkg -i google-chrome-stable_current_amd64.deb || true \
@@ -70,7 +70,8 @@ RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd6
 # Don't install ChromeDriver manually - let webdriver-manager handle it
 # (Your Python code already uses ChromeDriverManager().install())
 # Copy Python requirements
-COPY Pipfile Pipfile.lock ./
+COPY backend/Pipfile backend/Pipfile.lock ./
+
 # Install pipenv and Python dependencies
 RUN pip install pipenv && \
     pipenv install --system --deploy
