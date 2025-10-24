@@ -39,13 +39,13 @@ export const AuthProvider = ({ children }) => {
         console.log('🔍 Token exists:', !!token);
         console.log('🔍 Token preview:', token ? token.substring(0, 30) + '...' : 'NO TOKEN');
 
-        if (!token) {
-            throw new Error('No authentication token available');
-        }
+        // if (!token) {
+        //     throw new Error('No authentication token available');
+        // }
 
         const defaultOptions = {
             headers: {
-                'Authorization': `Bearer ${token}`,
+                // 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
                 ...options.headers,
             },
@@ -69,129 +69,130 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Computed property for admin status
-    const isAdmin = user?.is_admin || false;
+    // const isAdmin = user?.is_admin || false;
+    const isAdmin = true;
 
     // CHECK FOR EXISTING LOGIN ON EACH PAGE RELOAD
-    useEffect(() => {
-        const checkExistingAuth = async () => {
-            if (user) return;  // Skip if user already exists
+    // useEffect(() => {
+    //     const checkExistingAuth = async () => {
+    //         if (user) return;  // Skip if user already exists
 
-            const stored_token = localStorage.getItem('token');
+    //         const stored_token = localStorage.getItem('token');
 
-            if (stored_token) {
-                try {
-                    // Verify token is still valid by calling /me endpoint
-                    const response = await fetch(`${BASE_URL}/api/auth/me`, {
-                        headers: {
-                            'Authorization': `Bearer ${stored_token}`,
-                            'Content-Type': 'application/json'
-                        }
-                    });
+    //         if (stored_token) {
+    //             try {
+    //                 // Verify token is still valid by calling /me endpoint
+    //                 const response = await fetch(`${BASE_URL}/api/auth/me`, {
+    //                     headers: {
+    //                         'Authorization': `Bearer ${stored_token}`,
+    //                         'Content-Type': 'application/json'
+    //                     }
+    //                 });
 
-                    // Token is valid -> User gets logged in
-                    if (response.ok) {
-                        const data = await response.json();
-                        setUser(data.user);
-                        setToken(stored_token);
-                    } else {
-                        // Token is invalid, remove it
-                        localStorage.removeItem('token');
-                    }
-                } catch (error) {
-                    console.error('Auth check failed:', error);
-                    localStorage.removeItem('token');
-                }
-            }
+    //                 // Token is valid -> User gets logged in
+    //                 if (response.ok) {
+    //                     const data = await response.json();
+    //                     setUser(data.user);
+    //                     setToken(stored_token);
+    //                 } else {
+    //                     // Token is invalid, remove it
+    //                     localStorage.removeItem('token');
+    //                 }
+    //             } catch (error) {
+    //                 console.error('Auth check failed:', error);
+    //                 localStorage.removeItem('token');
+    //             }
+    //         }
 
-            setLoading(false);
-        };
+    //         setLoading(false);
+    //     };
 
-        checkExistingAuth();
-    }, []);
+    //     checkExistingAuth();
+    // }, []);
 
-    // Fetches Google Auth Url from BKND.
-    const loginWithGoogle = async() => {
-        console.log("google login attempt");
-        setLoading(true);
-        setOAuthLoading(true);
+    // // Fetches Google Auth Url from BKND.
+    // const loginWithGoogle = async() => {
+    //     console.log("google login attempt");
+    //     setLoading(true);
+    //     setOAuthLoading(true);
 
-        try {
-            const response = await fetch(`${BASE_URL}/api/auth/google/login`);
-            const { auth_url } = await response.json();
-            window.location.href = auth_url;
-        } catch (error) {
-            return { success: false, error: "Network error occurred" };
-        }
-    }
+    //     try {
+    //         const response = await fetch(`${BASE_URL}/api/auth/google/login`);
+    //         const { auth_url } = await response.json();
+    //         window.location.href = auth_url;
+    //     } catch (error) {
+    //         return { success: false, error: "Network error occurred" };
+    //     }
+    // }
 
-    const signupWithGoogle = async() => {
-        console.log("google signup attempt");
-    }
+    // const signupWithGoogle = async() => {
+    //     console.log("google signup attempt");
+    // }
 
-    // LOGIN FUNCTION
-    const login = async (credentials) => {
-        setLoading(true);
+    // // LOGIN FUNCTION
+    // const login = async (credentials) => {
+    //     setLoading(true);
 
-        try {
-            const response = await fetch(`${BASE_URL}/api/auth/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(credentials)
-            });
+    //     try {
+    //         const response = await fetch(`${BASE_URL}/api/auth/login`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(credentials)
+    //         });
 
-            const data = await response.json();
+    //         const data = await response.json();
 
-            if (response.ok) {
-                setUser(data.user);
-                setToken(data.token);
-                localStorage.setItem('token', data.token);
-                return { success: true, data };
-            } else {
-                return { success: false, error: data.error };
-            }
-        } catch (error) {
-            return { success: false, error: "Network error occurred" };
-        } finally {
-            setLoading(false);
-        }
-    }
+    //         if (response.ok) {
+    //             setUser(data.user);
+    //             setToken(data.token);
+    //             localStorage.setItem('token', data.token);
+    //             return { success: true, data };
+    //         } else {
+    //             return { success: false, error: data.error };
+    //         }
+    //     } catch (error) {
+    //         return { success: false, error: "Network error occurred" };
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // }
 
-    const signup = async (userData) => {
-        setLoading(true);
+    // const signup = async (userData) => {
+    //     setLoading(true);
 
-        try {
-            const response = await fetch(`${BASE_URL}/api/auth/signup`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            });
+    //     try {
+    //         const response = await fetch(`${BASE_URL}/api/auth/signup`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(userData)
+    //         });
 
-            const data = await response.json();
+    //         const data = await response.json();
 
-            if (response.ok) {
-                setUser(data.user);
-                setToken(data.token);
-                localStorage.setItem('token', data.token);
-                return { success: true, data };
-            } else {
-                return { success: false, error: data.error };
-            }
-        } catch (error) {
-            return { success: false, error: "Network error occurred" };
-        } finally {
-            setLoading(false);
-        }
-    }
+    //         if (response.ok) {
+    //             setUser(data.user);
+    //             setToken(data.token);
+    //             localStorage.setItem('token', data.token);
+    //             return { success: true, data };
+    //         } else {
+    //             return { success: false, error: data.error };
+    //         }
+    //     } catch (error) {
+    //         return { success: false, error: "Network error occurred" };
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // }
 
-    const logout = async () => {
-        setUser(null);
-        setToken(null);
-        localStorage.removeItem('token');
-    }
+    // const logout = async () => {
+    //     setUser(null);
+    //     setToken(null);
+    //     localStorage.removeItem('token');
+    // }
 
     // ADMIN FUNCTIONS
     const getLogsOverview = async () => {
