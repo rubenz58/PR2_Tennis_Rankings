@@ -9,11 +9,11 @@ Production Features: Logging system, background job processing, and automated da
 Admin Page: To monitor scheduler status and logs
 
 Main page
-![alt text](https://github.com/rubenz58/PR2_Tennis_Rankings/blob/main/PR_2_1?raw=true)
+![alt text](https://github.com/rubenz58/PR2_Tennis_Rankings/blob/main/PR_2_1.png?raw=true)
 
 
 Admin Page
-![alt text](https://github.com/rubenz58/PR2_Tennis_Rankings/blob/main/PR_2_2?raw=true)
+![alt text](https://github.com/rubenz58/PR2_Tennis_Rankings/blob/main/PR_2_2.png?raw=true)
 
 Scheduler
-![alt text](https://github.com/rubenz58/PR2_Tennis_Rankings/blob/main/PR_2_3?raw=true)
+![alt text](https://github.com/rubenz58/PR2_Tennis_Rankings/blob/main/PR_2_3.png?raw=true)
