@@ -5,29 +5,15 @@ Backend: Flask REST API with PostgreSQL database
 Data Management: SQLAlchemy ORM with Alembic migrations
 Automated Data Collection: Selenium & BeautifulSoup web scraping with weekly scheduling
 Infrastructure: Docker containerization deployed on Railway
-Authentication: Email/password and Google OAuth integration
 Production Features: Logging system, background job processing, and automated database maintenance
+Admin Page: To monitor scheduler status and logs
 
-Concise:
-Tennis Rankings App
-Full-stack application with automated data collection
-
-Stack: React, Flask, PostgreSQL, Docker
-Features: Web scraping, scheduled jobs, user authentication, production logging
-Deployment: Containerized on Railway with CI/CD
+Main page
+![alt text](https://github.com/rubenz58/PR2_Tennis_Rankings/blob/main/PR_2_1?raw=true)
 
 
-Notes:
-- Google OAuth temporarily disabled because of Google Cloud issues.
+Admin Page
+![alt text](https://github.com/rubenz58/PR2_Tennis_Rankings/blob/main/PR_2_2?raw=true)
 
-
-To Add:
-> Persistent Logs across Railway deployments.
-- Clicking on players.
-- Email Verification
-- Password change
-
-// Will have to trigger manual update for DB. > Worked
-// Have to add myself as the is_admin super user. > Done
-
-> Redeploying 2
+Scheduler
+![alt text](https://github.com/rubenz58/PR2_Tennis_Rankings/blob/main/PR_2_3?raw=true)
