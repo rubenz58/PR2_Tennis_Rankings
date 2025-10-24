@@ -37,10 +37,10 @@ export const RankingsProvider = ({ children }) => {
     // CHECK FOR EXISTING PLAYERS on first page load --> ON EACH PAGE RELOAD
     useEffect(() => { // useEffect itself can't be async
 
-        if (authLoading || !user) return;
+        // if (authLoading || !user) return;
         fetchPlayers(0, 20);
 
-    }, [user, authLoading]);
+    }, []);
 
     const getNewPlayers = async() => {
         console.log("Getting new players");
@@ -52,12 +52,12 @@ export const RankingsProvider = ({ children }) => {
         setLoadingPlayers(true);
 
         // Have to include token since it's a protected route
-        if (token) {
+        // if (token) {
             try {
                 const response = await fetch(
                     `${BASE_URL}/api/rankings/players?offset=${offset}&limit=${limit}`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`,
+                        // 'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 });
@@ -88,7 +88,7 @@ export const RankingsProvider = ({ children }) => {
                 // This is network error. Couldn't get a reponse.
                 console.error("Couldn't retrieve players", error);
             }
-        }
+        // }
         setLoadingPlayers(false);
     };
 

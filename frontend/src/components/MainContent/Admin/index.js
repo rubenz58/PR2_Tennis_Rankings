@@ -28,37 +28,41 @@ const Admin = () => {
 
     // Load initial data - useEffect must come before any early returns
     useEffect(() => {
-        // Only load data if user is admin and not loading
-        if (!loading && user && isAdmin) {
-            loadOverviewData();
-        }
-    }, [loading, user, isAdmin]);
+        loadOverviewData();
+    }, []);
+
+    // useEffect(() => {
+    //     // Only load data if user is admin and not loading
+    //     if (!loading && user && isAdmin) {
+    //         loadOverviewData();
+    //     }
+    // }, [loading, user, isAdmin]);
 
     // If still loading auth, show loading
-    if (loading) {
-        return (
-            <div className="loading-container">
-                <div className="loading-text">Loading...</div>
-            </div>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <div className="loading-container">
+    //             <div className="loading-text">Loading...</div>
+    //         </div>
+    //     );
+    // }
 
     // If not logged in, redirect to login
-    if (!user) {
-        return <Navigate to="/login" replace />;
-    }
+    // if (!user) {
+    //     return <Navigate to="/login" replace />;
+    // }
 
     // If not admin, show unauthorized
-    if (!isAdmin) {
-        return (
-            <div className="unauthorized-container">
-                <div className="unauthorized-content">
-                    <h1 className="unauthorized-title">Access Denied</h1>
-                    <p className="unauthorized-message">You don't have admin privileges to access this page.</p>
-                </div>
-            </div>
-        );
-    }
+    // if (!isAdmin) {
+    //     return (
+    //         <div className="unauthorized-container">
+    //             <div className="unauthorized-content">
+    //                 <h1 className="unauthorized-title">Access Denied</h1>
+    //                 <p className="unauthorized-message">You don't have admin privileges to access this page.</p>
+    //             </div>
+    //         </div>
+    //     );
+    // }
 
     const loadOverviewData = async () => {
         try {
