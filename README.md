@@ -1,5 +1,7 @@
 Tennis Rankings App - Full-Stack Web Application
 
+Tracks the top 100 players in the world by scraping the official ATP website using BeautifulSoup and Selenium. Scheduler scrapes ATP website every monday to keep app up to date with live player rankings.
+
 Frontend: React with Context API for state management
 Backend: Flask REST API with PostgreSQL database
 Data Management: SQLAlchemy ORM with Alembic migrations
