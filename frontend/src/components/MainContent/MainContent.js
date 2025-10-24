@@ -51,9 +51,11 @@ const MainContent = () => {
 
                 {/* Protected Routes - redirect to login if not logged in */}
                 <Route path='/admin' element={
-                    <ProtectedRoute>
+                    // <ProtectedRoute>
+                    <PublicRoute>
                         <Admin />
-                    </ProtectedRoute>
+                    </PublicRoute>
+                    // </ProtectedRoute>
                 }/>
 
                 {/* Default redirects */}

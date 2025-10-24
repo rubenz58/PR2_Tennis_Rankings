@@ -56,7 +56,7 @@ def read_log_file_json(file_path, lines_to_show=50):
 
 @admin_bp.route('/logs', methods=['GET'])
 @jwt_required
-@admin_required
+# @admin_required
 def get_logs_overview():
     """Get overview of all log files"""
     log_files = {
@@ -125,7 +125,7 @@ def get_logs_overview():
 
 @admin_bp.route('/logs/app', methods=['GET'])
 @jwt_required
-@admin_required
+# @admin_required
 def get_app_logs():
     """Get application log data"""
     # Get optional query parameter for number of lines
@@ -141,7 +141,7 @@ def get_app_logs():
 
 @admin_bp.route('/logs/errors', methods=['GET'])
 @jwt_required
-@admin_required
+# @admin_required
 def get_error_logs():
     """Get error log data"""
     from flask import request
@@ -156,7 +156,7 @@ def get_error_logs():
 
 @admin_bp.route('/logs/scraping', methods=['GET'])
 @jwt_required
-@admin_required
+# @admin_required
 def get_scraping_logs():
     """Get scraping log data"""
     from flask import request
@@ -173,7 +173,7 @@ def get_scraping_logs():
 # GET /admin/api/logs/<type>/tail?lines=20
 @admin_bp.route('/logs/<log_type>/tail', methods=['GET'])
 @jwt_required
-@admin_required
+# @admin_required
 def tail_logs(log_type):
     """Get the last N lines of a specific log file (for real-time updates)"""
     from flask import request
@@ -197,7 +197,7 @@ def tail_logs(log_type):
 
 @admin_bp.route('/scheduler-status')
 @jwt_required
-@admin_required
+# @admin_required
 def scheduler_status():
     """Check if scheduler is running"""
     try:
@@ -213,7 +213,7 @@ def scheduler_status():
     
 @admin_bp.route('/trigger-manual-update')
 @jwt_required
-@admin_required
+# @admin_required
 def players_manual_update():
     """Trigger Manual Update of ATP Players Table"""
     try:
