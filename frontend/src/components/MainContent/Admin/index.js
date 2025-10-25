@@ -28,41 +28,37 @@ const Admin = () => {
 
     // Load initial data - useEffect must come before any early returns
     useEffect(() => {
-        loadOverviewData();
-    }, []);
-
-    // useEffect(() => {
-    //     // Only load data if user is admin and not loading
-    //     if (!loading && user && isAdmin) {
-    //         loadOverviewData();
-    //     }
-    // }, [loading, user, isAdmin]);
+        // Only load data if user is admin and not loading
+        if (!loading && user && isAdmin) {
+            loadOverviewData();
+        }
+    }, [loading, user, isAdmin]);
 
     // If still loading auth, show loading
-    // if (loading) {
-    //     return (
-    //         <div className="loading-container">
-    //             <div className="loading-text">Loading...</div>
-    //         </div>
-    //     );
-    // }
+    if (loading) {
+        return (
+            <div className="loading-container">
+                <div className="loading-text">Loading...</div>
+            </div>
+        );
+    }
 
     // If not logged in, redirect to login
-    // if (!user) {
-    //     return <Navigate to="/login" replace />;
-    // }
+    if (!user) {
+        return <Navigate to="/login" replace />;
+    }
 
     // If not admin, show unauthorized
-    // if (!isAdmin) {
-    //     return (
-    //         <div className="unauthorized-container">
-    //             <div className="unauthorized-content">
-    //                 <h1 className="unauthorized-title">Access Denied</h1>
-    //                 <p className="unauthorized-message">You don't have admin privileges to access this page.</p>
-    //             </div>
-    //         </div>
-    //     );
-    // }
+    if (!isAdmin) {
+        return (
+            <div className="unauthorized-container">
+                <div className="unauthorized-content">
+                    <h1 className="unauthorized-title">Access Denied</h1>
+                    <p className="unauthorized-message">You don't have admin privileges to access this page.</p>
+                </div>
+            </div>
+        );
+    }
 
     const loadOverviewData = async () => {
         try {
@@ -135,7 +131,7 @@ const Admin = () => {
                 <div className="header-content">
                     <div className="header-info">
                         <h1 className="header-title">Admin Dashboard</h1>
-                        {/* <p className="header-subtitle">Welcome, {user.name}</p> */}
+                        <p className="header-subtitle">Welcome, {user.name}</p>
                     </div>
                     <div className="tab-navigation">
                         <button

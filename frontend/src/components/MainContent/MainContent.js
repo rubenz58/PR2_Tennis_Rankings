@@ -18,7 +18,7 @@ const MainContent = () => {
         <div className="main-content-container">
             <Routes>
                 {/* Public Routes - redirect to dashboard if logged in */}
-                {/* <Route path='/login' element={
+                <Route path='/login' element={
                     <PublicRoute>
                         <LoginForm />
                     </PublicRoute>
@@ -33,7 +33,7 @@ const MainContent = () => {
                     <PublicRoute>
                         <GoogleCallback />
                     </PublicRoute>
-                }/> */}
+                }/>
 
                 {/* Protected Routes - redirect to login if not logged in */}
                 <Route path='/dashboard' element={
@@ -44,18 +44,16 @@ const MainContent = () => {
 
                 {/* Protected Routes - redirect to login if not logged in */}
                 <Route path='/rankings' element={
-                    <PublicRoute>
+                    <ProtectedRoute>
                         <Rankings />
-                    </PublicRoute>
+                    </ProtectedRoute>
                 }/>
 
                 {/* Protected Routes - redirect to login if not logged in */}
                 <Route path='/admin' element={
-                    // <ProtectedRoute>
-                    <PublicRoute>
+                    <ProtectedRoute>
                         <Admin />
-                    </PublicRoute>
-                    // </ProtectedRoute>
+                    </ProtectedRoute>
                 }/>
 
                 {/* Default redirects */}
