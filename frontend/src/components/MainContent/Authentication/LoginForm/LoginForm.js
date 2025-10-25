@@ -16,7 +16,12 @@ const LoginForm = () => {
     // If any value in a used CONTEXT CHANGES, it triggers a rerender 
     // of that component. That's why loading gets re-rendered while
     // waiting for something like login()
-    const { login, loginWithGoogle, loading } = useAuth();
+    const {
+        login,
+        guestLogin,
+        loginWithGoogle,
+        loading
+    } = useAuth();
 
     // As a user types, values displayed will change
     const handleChange = (e) => {
@@ -59,6 +64,22 @@ const LoginForm = () => {
         // If successful, AuthContext updates user state automatically
     }
 
+    // GOOGLE LOGIN
+    const handleGuestLogin = async(e) => {
+        e.preventDefault();
+  
+        const guestFormData = {
+            email: 'guest@email.com',
+            password: 'GUESTguest1!'
+        };
+        
+        const result = await login(guestFormData);
+        
+        if (!result.success) {
+            setError(result.error);
+        }
+    }
+
     return (
         <div className={`login-container ${loading ? 'login-container-loading' : ''}`}>
             <h2 className="login-title">Login</h2>
@@ -85,6 +106,17 @@ const LoginForm = () => {
 
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
+                    <button
+                        type="button"
+                        disabled={ loading }
+                        onClick={ handleGuestLogin }
+                        className="login-submit-button"
+                    >
+                        {loading ? "Logging in..." : "Guest Login"}
+                    </button>
+                    <div className="form-divider">
+                        <span>or</span>
+                    </div>
                     <label htmlFor="email" className="form-label">
                         Email:
                     </label>
@@ -117,7 +149,7 @@ const LoginForm = () => {
 
                 <button
                     type="submit"
-                    disabled={loading}
+                    disabled={ loading }
                     className="login-submit-button"
                 >
                     {loading ? "Logging in..." : "Login"}
