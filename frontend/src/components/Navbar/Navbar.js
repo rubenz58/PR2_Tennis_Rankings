@@ -1,4 +1,6 @@
 import { useAuth } from "../../contexts/AuthContext";
+import { Link } from 'react-router-dom';
+
 
 import './Navbar.css';
 
@@ -9,7 +11,10 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <h1 className="navbar-title">Tennis Rankings</h1>
+            {/* <h1 className="navbar-title">Tennis Rankings</h1> */}
+            <Link to="/rankings" className="navbar-title-link">
+                <h1 className="navbar-title">Tennis Rankings</h1>
+            </Link>
             
             {user ? (
                 <div className="navbar-user">

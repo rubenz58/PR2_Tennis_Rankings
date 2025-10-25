@@ -13,12 +13,26 @@
 }
 
 /* App title/logo */
+.navbar-title-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
 .navbar-title {
-  color: #1a1a1a;
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  border-radius: 8px;
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
   letter-spacing: -0.025em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-title:hover {
+  background-color: #e0e0e0;
 }
 
 /* User section when logged in */
@@ -96,6 +110,15 @@
 /* Empty state when not logged in */
 .navbar-empty {
   width: 1px; /* Takes minimal space but maintains layout */
+}
+
+.navbar-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-title-link:hover {
+  cursor: pointer;
 }
 
 /* Responsive design */
