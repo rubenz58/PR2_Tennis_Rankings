@@ -64,7 +64,7 @@ const LoginForm = () => {
         // If successful, AuthContext updates user state automatically
     }
 
-    // GOOGLE LOGIN
+    // GUEST LOGIN
     const handleGuestLogin = async(e) => {
         e.preventDefault();
   
